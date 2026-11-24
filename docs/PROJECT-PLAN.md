@@ -1,5 +1,7 @@
 # Workshop Cut-List Planner
 
+> This document specifies phase 1 of the program in [#31](https://github.com/jortega0033/workshop-cut-list-planner/issues/31). Hour figures in it are early estimates for that phase; its open tickets add up to 53 to 79 hours (2026-11-24). Work that it defers is planned in the later phases only where the program names it.
+
 An offline planner for laying rectangular parts out on sheet stock, comparing material use, and printing dimensioned plans.
 
 ## Product requirements
