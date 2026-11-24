@@ -6,7 +6,7 @@ Working instructions for this repository. Read this file first, then the documen
 
 An offline planner for a furniture maker or small workshop: enter sheets and rectangular parts, get two deterministic layouts, compare sheets, reusable offcuts and kerf loss, see why a part does not fit, save the project and print a dimensioned plan. Python 3.12 standard library and SQLite, `127.0.0.1` only, whole millimetres, fictional projects.
 
-**Nothing is implemented yet.** The repository holds the plan, the delivery tooling and the backlog in epic #1. Commands marked planned below do not work yet. Do not describe a planned thing as working, and do not claim a passing baseline: there is none.
+**Only the scaffold exists; there is no product behaviour yet.** The repository holds the plan, the delivery tooling, the backlog in epic #1 and a runnable scaffold (package, smoke tests, CI). Commands marked planned below do not work yet. Do not describe a planned thing as working, and do not claim a passing product baseline beyond the smoke tests.
 
 ## Sources of truth
 
@@ -39,8 +39,8 @@ Python 3.12 or 3.13. No install step is needed.
 
 | Purpose | Command | Status |
 |---|---|---|
-| Tests | `python -m unittest discover -s tests` | planned: real with the scaffold |
-| Help and version | `python -m cut_planner --help` | planned: real with the scaffold |
+| Tests | `python -m unittest discover -s tests` | real (scaffold) |
+| Help and version | `python -m cut_planner --help` | real (scaffold) |
 | Run the app | `python -m cut_planner serve --port 8770 --data-dir ./data` | planned: #2 |
 | Plan a project file | `python -m cut_planner plan <project.json>` | planned: #3 |
 
