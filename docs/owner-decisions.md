@@ -36,3 +36,15 @@ The plan leaves these open. Each is a recommendation by the orchestrator, adopte
 | #6 | Print | Browser print with CSS page rules; no PDF library. The paper size is A4. |
 | #6 | Formula escaping | A leading `=`, `+`, `-`, `@`, tab or carriage return in a label gets a leading apostrophe in the CSV. |
 | none | Licence | MIT, already in the repository (`LICENSE`). No ticket changes it. |
+
+## Program decisions (owner, 2026-11-24)
+
+The owner accepted the goal and each suggestion below. They apply from the phase they name; the rules of `CLAUDE.md` hold for phase 1 as written.
+
+| Decision | Implemented in |
+|---|---|
+| The repository has a program goal above phase 1: a cutting and nesting engine with proofs, in 6 phases. | Program issue #31 |
+| Irregular shapes, joinery and claims of an optimum are outside the first release. Suggested: they enter with phases 3, 4 and 6, each with its proof. | Program issue #31 |
+| Machine control stays outside every phase. Suggested: cut order is printed for people and no machine code is written. | Program issue #31 |
+| Plain Python may be too slow for the exact phases. Suggested: choose the engine language at the start of phase 2 and keep Python for the server and the checker. | Program issue #31 |
+| Public instances must be reusable. Suggested: the phase checks the licence first and fetches a pinned version outside the repository. | Program issue #31 |
