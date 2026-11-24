@@ -4,9 +4,9 @@ The full repository instructions are in [CLAUDE.md](CLAUDE.md). This file repeat
 
 ## Status
 
-Nothing is implemented. The repository holds the plan (`docs/PROJECT-PLAN.md`), the delivery tooling and the backlog (epic #1). Python is installed on the owner's PC, so every command runs locally and in CI; record both.
+Only the scaffold exists (package, smoke tests, CI); there is no product behaviour. The repository holds the plan (`docs/PROJECT-PLAN.md`), the delivery tooling and the backlog (epic #1). Python is installed on the owner's PC, so the tests run locally and in CI; record both.
 
-## Commands (planned; the scaffold makes the first ones real)
+## Commands (tests and help work; `serve` is planned in #2, `plan` in #3)
 
 ```
 python -m unittest discover -s tests

@@ -1,0 +1,6 @@
+[project]
+name = "cut-list-planner"
+version = "0.0.0"
+description = "Local cut list planner for workshop sheet goods"
+requires-python = ">=3.12"
+dependencies = []

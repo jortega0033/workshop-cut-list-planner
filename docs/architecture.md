@@ -1,6 +1,6 @@
 # Implementer map
 
-Status: **planned, not implemented.** This page maps the boundaries that [PROJECT-PLAN.md](PROJECT-PLAN.md) requires onto a module layout so that parallel tickets do not collide. It adds no requirement; the plan wins where they differ. The names are the orchestrator's proposal, fixed by the scaffold; a ticket that changes one corrects this page in the same pull request.
+Status: **scaffold only; modules are empty shells and no product behaviour exists.** This page maps the boundaries that [PROJECT-PLAN.md](PROJECT-PLAN.md) requires onto a module layout so that parallel tickets do not collide. It adds no requirement; the plan wins where they differ. The names are the orchestrator's proposal, fixed by the scaffold; a ticket that changes one corrects this page in the same pull request.
 
 ## Planned module map
 
@@ -14,9 +14,10 @@ Status: **planned, not implemented.** This page maps the boundaries that [PROJEC
 | Exports | `cut_planner/exports.py` | Parts and offcuts CSV from verified geometry | #6 |
 | HTTP | `cut_planner/server.py` | Loopback bind, request guards, routes, static assets | #2 (input), #5, #6 |
 | Browser assets | `cut_planner/static/` | Project list, forms, comparison, sheets in SVG, print | #2 (forms), #6 |
+| Command line | `cut_planner/__main__.py`, `cut_planner/cli.py` | Arguments, `serve` and `plan` commands, exit codes | #2 (serve), #3 (plan) |
 | Hand-made trees | `tests/manifests/` | Independent trees and placements, right and wrong | #4 |
 
-Dependency direction: `server` depends on `store`, `layout`, `verify`, `parts_csv` and `exports`; `exports` on verified results only; `layout`, `verify`, `store` and `parts_csv` on `project`. `verify` imports nothing from `layout`. `project` imports nothing from the package.
+Dependency direction: `cli` depends on `project`, `layout` and `server`; `server` on `project`, `store`, `layout`, `verify`, `parts_csv` and `exports`; `exports` on verified results only; `layout`, `verify`, `store` and `parts_csv` on `project`. `verify` imports nothing from `layout`. `project` imports nothing from the package.
 
 ## Freeze points
 

@@ -2,7 +2,7 @@
 
 An offline panel layout tool with stock, grain, kerf and printable cutting plans.
 
-This repository contains the plan for the first implementation epic.
+This repository contains the plan for the first implementation epic and a runnable scaffold. There is no product behaviour yet.
 
 - [Product requirements](docs/PROJECT-PLAN.md#product-requirements)
 - [Technical design](docs/PROJECT-PLAN.md#technical-design)

@@ -1,0 +1,165 @@
+/* Pipenzo visual system v3 "Flow look" tokens (docs/PIPENZO_IT_VISUAL.md, numbers in docs/PIPENZO_IT_FLOW_LOOK.md).
+   Black page, Flow-style alpha layers, one accent: Pipenzo yellow #FECE02. Red exists only as the danger colour.
+   Structure stays test-friendly: solid colours are 6-digit hex in a light :root block, then a dark block inside the
+   dark colour-scheme media query (keep that phrase out of comments above it: the token test splits the file at its
+   first occurrence). Dark is the primary design; the light block is the matching light theme.
+   Alpha rule: Flow draws surfaces as rgba(218,220,224,a) over black. Text never sits on a bare alpha. Every solid token
+   below is the OPAQUE equivalent of such a layer over the page, so every text floor is computable:
+     --surface    #202124 = rgba(218,220,224,.15) over #000 (effective #212122), Flow tile fill
+     --bg-sunken  #17181A = rgba(218,220,224,.10) over #000 (effective #161616), Flow field / chip fill
+     --bg-raised  #2B2C2F = rgba(218,220,224,.20) over #000 (effective #2C2C2D), inputs inside cards, tracker nodes
+     --ink        #161718 = Flow prompt-box fill rgba(22,23,24,.75) taken opaque (effective on black: #101112)
+   Muted text rgba(218,220,224,.75) over --surface is #ACADB1; the token --muted #BDC1C6 is lighter than that, so it
+   passes everywhere the .75 text would.
+   Yellow rule (round 3): yellow is used ONLY on the primary button, the current-step node, the "your turn" chip, the
+   small dot in the hero turn kicker and the overlay's opening dot. Black text on it is 14.0:1, so a filled yellow button needs no outline: on light it is
+   1.5:1 against white by design, and the label contrast (14:1) is what identifies it, so --primary-edge is transparent. */
+:root {
+  color-scheme: light dark;
+
+  /* surfaces (opaque floors), light theme */
+  --bg: #FFFFFF;            /* page */
+  --bg-raised: #FFFFFF;     /* inputs, tracker nodes */
+  --surface: #F1F3F4;       /* cards and tiles (alpha-fill look, no heavy borders) */
+  --bg-sunken: #E8EAED;     /* wells: chips, meter track, skeleton base, disabled primary */
+
+  /* text */
+  --fg: #202124;            /* 16.1:1 on --bg, 14.5:1 on --surface */
+  --muted: #44474B;         /* 9.3:1 on --bg, 8.4:1 on --surface, 7.8:1 on --bg-sunken */
+  --faint: #5F6368;         /* 6.1:1 on --bg, 5.4:1 on --surface, 5.0:1 on --bg-sunken; captions >= 12px */
+  --border: #DADCE0;        /* hairlines only */
+  --control-border: #80868B;/* 3.7:1 on --bg, 3.3:1 on --surface (non-text, radio dots and grip) */
+  --hairline: #DADCE0;      /* dashed-outline replacement, input edge: 1px solid */
+
+  /* hero: light = the card surface, dark = Flow prompt-box surface */
+  --hero-bg: #FFFFFF;
+  --on-hero: #202124;       /* 16.1:1 on --hero-bg */
+  --on-hero-muted: #44474B; /* 9.3:1 on --hero-bg */
+  --hero-chip-border: #DADCE0;
+  --hero-border: #E8EAED;   /* 1px line */
+  --hero-shadow: 0 8px 24px -8px rgba(32, 33, 36, 0.16);
+
+  /* dark block (toast) */
+  --ink: #202124;
+  --on-ink: #FFFFFF;        /* 16.1:1 on --ink */
+  --on-ink-muted: #BDC1C6;  /* 8.9:1 on --ink */
+  --ink-border: #3C4043;
+
+  /* the one accent: Pipenzo yellow. Fills carry black text (14.0:1). */
+  --primary: #FECE02;       /* fill: primary button, now-node, turn chip and turn dot, overlay opening dot */
+  --primary-press: #E5B800; /* hover/press fill, black text 11.2:1 */
+  --primary-edge: transparent; /* no outline: the 14:1 label identifies the button (see header) */
+  --on-primary: #000000;    /* 14.0:1 on --primary */
+  --success: #1E8E3E;       /* connected dot (non-text): 4.2:1 on --bg, 3.5:1 on --bg-sunken */
+
+  /* semantic: no extra hues. ok is neutral, warn rides the yellow, danger is the only red. Always icon + word. */
+  --ok: #202124;            /* 13.4:1 on --ok-bg */
+  --ok-bg: #E8EAED;
+  --warn-fg: #202124;       /* neutral; warnings are told apart by icon + word. 14.5:1 on --warn-bg */
+  --warn-bg: #F1F3F4;       /* = --surface */
+  --danger: #B3261E;        /* deep red, 5.5:1 on --danger-bg, 6.5:1 on --bg */
+  --danger-bg: #FCE8E6;
+  --info: #3C4043;
+  --focus: #202124;         /* 3px ring, 16.1:1 vs --bg */
+  --on-media: #FFFFFF;      /* text/icons on photos and video (always on a scrim) */
+
+  /* alpha (never the only floor under text) */
+  --glass: rgba(255, 255, 255, 0.80);
+  --glass-strong: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(32, 33, 36, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.85);
+  --glass-video: rgba(22, 23, 24, 0.75);        /* Flow prompt-box glass; white text on it is >= 7.9:1 even over a white frame (#505152) */
+  --glass-video-border: rgba(218, 220, 224, 0.05);
+  --scrim: rgba(0, 0, 0, 0.55);
+  --ink-hover: rgba(255, 255, 255, 0.12);       /* hover layer on dark blocks (hero, toast), both themes */
+  --state-hover: rgba(32, 33, 36, 0.06);        /* hover layer on transparent controls */
+  --state-selected: rgba(32, 33, 36, 0.10);     /* selected row / segment fill */
+  --btn-secondary: rgba(32, 33, 36, 0.05);      /* secondary pill fill */
+  --btn-secondary-border: rgba(32, 33, 36, 0.20);
+  --input-border: #80868B;                      /* input edge = control border: 3.7:1 on --bg, 3.3:1 on --surface (WCAG 1.4.11) */
+  --ring-accent: rgba(32, 33, 36, 0.20);
+  --shadow-1: none;
+  --shadow-2: 0 4px 12px -4px rgba(32, 33, 36, 0.18);
+  --shadow-3: 0 16px 32px -8px rgba(32, 33, 36, 0.22);
+  --shadow-float: 0 16px 32px -8px rgba(32, 33, 36, 0.22);
+  --shadow-on-video: 0 16px 32px -8px rgba(0, 0, 0, 0.4);
+  --shadow-on-video-lg: 0 16px 32px -8px rgba(0, 0, 0, 0.4);
+  --blur: 40px;
+
+  /* gradients (restrained) */
+  --grad-canvas: linear-gradient(var(--bg), var(--bg));
+  --grad-scrim-bottom: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+  --grad-ink: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.92) 70%);
+
+  /* type: Google Sans Flex and Inter are bundled in assets/fonts and loaded by fonts.css (local files only), then system fonts */
+  --font: "Google Sans Flex", "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Google Sans Flex", "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  /* space, radius */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px;
+  --radius-control: 12px;   /* icon buttons, inputs, menus */
+  --radius-card: 16px;      /* cards, tiles, list rows */
+  --radius-media: 16px;
+  --radius-hero: 28px;      /* hero / check surface */
+  --radius-chip: 15px;      /* settings chip */
+  --radius-pill: 999px;
+
+  /* motion: Flow changes button state at .1s ease-in-out and nothing bounces */
+  --dur-1: 100ms; --dur-2: 100ms; --dur-3: 240ms; --dur-4: 600ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: ease-in-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;          /* Flow page */
+    --bg-raised: #2B2C2F;
+    --surface: #202124;
+    --bg-sunken: #17181A;
+    --fg: #FFFFFF;          /* 21.0:1 on --bg, 16.1:1 on --surface */
+    --muted: #BDC1C6;       /* 11.6:1 on --bg, 8.9:1 on --surface, 7.7:1 on --bg-raised */
+    --faint: #9AA0A6;       /* 8.0:1 on --bg, 6.1:1 on --surface, 5.3:1 on --bg-raised */
+    --border: #3C4043;
+    --control-border: #80868B; /* 5.7:1 on --bg, 4.4:1 on --surface, 3.8:1 on --bg-raised */
+    --hairline: #3C4043;      /* Flow rgba(218,220,224,.15) as an opaque line */
+    --hero-bg: #161718;
+    --on-hero: #FFFFFF;       /* 18.0:1 */
+    --on-hero-muted: #BDC1C6; /* 9.9:1 */
+    --hero-chip-border: #3C4043;
+    --hero-border: transparent;
+    --hero-shadow: inset 0 0 0 1px rgba(218, 220, 224, 0.05), 0 16px 32px -8px rgba(0, 0, 0, 0.4);
+    --ink: #161718;
+    --on-ink: #FFFFFF;      /* 18.0:1 */
+    --on-ink-muted: #BDC1C6;/* 9.9:1 */
+    --ink-border: #3C4043;
+    --primary: #FECE02;     /* 14.0:1 vs --bg, 10.8:1 vs --surface (non-text) */
+    --primary-press: #E5B800;
+    --on-primary: #000000;  /* 14.0:1 on --primary, 11.2:1 on --primary-press */
+    --success: #78D390;     /* Flow success: 11.5:1 on --bg, 8.8:1 on --surface */
+    --ok: #F1F3F4;          /* 12.5:1 on --ok-bg */
+    --ok-bg: #2B2C2F;
+    --warn-fg: #FFFFFF;     /* neutral; 16.1:1 on --warn-bg */
+    --warn-bg: #202124;     /* = --surface */
+    --danger: #FE6E6E;      /* Flow danger: 7.7:1 on --bg, 5.9:1 on --danger-bg and --surface */
+    --danger-bg: #3A1513;
+    --info: #DADCE0;
+    --focus: #FECE02;       /* 14.0:1 vs --bg (a focus ring is not a yellow decoration) */
+
+    --glass: rgba(22, 23, 24, 0.75);
+    --glass-strong: rgba(0, 0, 0, 0.85);
+    --glass-border: rgba(218, 220, 224, 0.05);
+    --glass-highlight: rgba(218, 220, 224, 0.05);
+    --scrim: rgba(0, 0, 0, 0.66);
+    --state-hover: rgba(218, 220, 224, 0.10);
+    --state-selected: rgba(218, 220, 224, 0.25);
+    --btn-secondary: rgba(255, 255, 255, 0.05);
+    --btn-secondary-border: rgba(255, 255, 255, 0.15);
+    --ring-accent: rgba(255, 255, 255, 0.25);
+    --input-border: #80868B;   /* 4.4:1 on --surface, 4.8:1 on --bg-sunken (WCAG 1.4.11) */
+    --shadow-1: none;
+    --shadow-2: 0 8px 16px -6px rgba(0, 0, 0, 0.5);
+    --shadow-3: 0 16px 32px -8px rgba(0, 0, 0, 0.4);
+    --shadow-float: 0 16px 32px -8px rgba(0, 0, 0, 0.4);
+  }
+}
